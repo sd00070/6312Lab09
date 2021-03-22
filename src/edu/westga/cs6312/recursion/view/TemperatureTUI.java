@@ -1,5 +1,7 @@
 package edu.westga.cs6312.recursion.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import edu.westga.cs6312.recursion.model.TemperatureManager;
@@ -82,6 +84,15 @@ public class TemperatureTUI {
     }
 
     /**
+     * Prompts the user for an input with the given message and returns the user's
+     * input.
+     */
+    private String getUserLine(String message) {
+        System.out.print(message + ": ");
+        return this.keyboard.nextLine();
+    }
+
+    /**
      * Prompts the user for an integer value via the provided message, obtains the
      * user's input, coverts the user input to an integer, and returns the converted
      * input. Continues to prompt the user if the input is invalid.
@@ -94,8 +105,7 @@ public class TemperatureTUI {
         boolean isValid = false;
 
         do {
-            System.out.print(message + ": ");
-            String inputtedLine = this.keyboard.nextLine();
+            String inputtedLine = this.getUserLine(message);
             try {
                 userInt = Integer.parseInt(inputtedLine);
                 isValid = true;
@@ -114,6 +124,25 @@ public class TemperatureTUI {
      * into the primary TemperatureManager.
      */
     private void addTemperaturesFromFile() {
+        String userProvidedPath = this.getUserLine("Please enter file containing the temperatures");
+
+        File userSelectedFile = new File(userProvidedPath);
+        try (Scanner selectedFileScanner = new Scanner(userSelectedFile)) {
+            while (selectedFileScanner.hasNextLine()) {
+                String currentLine = selectedFileScanner.nextLine();
+
+                try {
+                    int currentNumber = Integer.parseInt(currentLine);
+                    System.out.println("Read temperature: " + currentNumber);
+                    this.primaryManager.addTemperature(currentNumber);
+                } catch (NumberFormatException numberFormatException) {
+                    System.out.println("Error: " + currentLine + " cannot be converted to a number");
+                }
+            }
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("That file does not exist. Returning to main menu.");
+            return;
+        }
     }
 
     /**

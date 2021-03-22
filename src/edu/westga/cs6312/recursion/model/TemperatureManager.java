@@ -62,4 +62,33 @@ public class TemperatureManager {
 
 		return output.trim();
 	}
+
+	/**
+	 * Creates a space-delimited, single-line String out of the list of temperatures
+	 * in reverse order of insertion.
+	 * 
+	 * The internal implementation uses recursion. This method calls a private
+	 * helper method that actually performs the recursion. This method provides the
+	 * initial values for the recursive method.
+	 * 
+	 * @return the reversed list String
+	 */
+	public String reverseRecursion() {
+		return this.reverseHelper(this.listOfTemperatures.size() - 1).trim();
+	}
+
+	/**
+	 * Serves as the recursive private helper method for reverseRecursion. This
+	 * method does the actual recursion necessary to perform the reverse task.
+	 * 
+	 * @param currentIndex -- first call: the initial index (last temperature),
+	 *                     subsequent calls: next index
+	 * @return the reversed list String
+	 */
+	private String reverseHelper(int currentIndex) {
+		if (currentIndex < 0) {
+			return "";
+		}
+		return this.listOfTemperatures.get(currentIndex) + " " + this.reverseHelper(currentIndex - 1);
+	}
 }

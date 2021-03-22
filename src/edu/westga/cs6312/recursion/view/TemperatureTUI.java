@@ -50,13 +50,16 @@ public class TemperatureTUI {
                     this.addTemperaturesFromFile();
                     break;
                 case 2:
-                    this.displayOriginalList();
+                    System.out.println("The original temperatures are:");
+                    System.out.println(this.primaryManager.toString());
                     break;
                 case 3:
-                    this.displayLoopReversedList();
+                    System.out.println("The loop-reversed temperatures are:");
+                    System.out.println(this.primaryManager.reverseLoop());
                     break;
                 case 4:
-                    this.displayRecursionReversedList();
+                    System.out.println("The recursive-reversed temperatures are:");
+                    System.out.println(this.primaryManager.reverseRecursion());
                     break;
                 case 5:
                     System.out.println("Thank you for using the Temperature Manager Application");
@@ -141,34 +144,6 @@ public class TemperatureTUI {
             }
         } catch (FileNotFoundException fileNotFoundException) {
             System.out.println("That file does not exist. Returning to main menu.");
-            return;
         }
-    }
-
-    /**
-     * Calls the primary TemperatureManager's toString method and prints the result
-     * to the console.
-     */
-    private void displayOriginalList() {
-        System.out.println("The original temperatures are:");
-        System.out.println(this.primaryManager.toString());
-    }
-
-    /**
-     * Calls the primary TemperatureManager's reverseLoop method and prints the
-     * result to the console.
-     */
-    private void displayLoopReversedList() {
-        System.out.println("The loop-reversed temperatures are:");
-        System.out.println(this.primaryManager.reverseLoop());
-    }
-
-    /**
-     * Calls the primary TemperatureManager's reverseRecursion method and prints the
-     * result to the console.
-     */
-    private void displayRecursionReversedList() {
-        System.out.println("The recursive-reversed temperatures are:");
-        System.out.println(this.primaryManager.reverseRecursion());
     }
 }

@@ -34,7 +34,40 @@ public class TemperatureTUI {
      * leaks.
      */
     public void run() {
+        System.out.println("Welcome to the Temperature Manager Application.");
+        System.out.println();
 
+        int userSelection;
+        do {
+            this.printMenuOptions();
+            userSelection = this.getUserInt("Please enter your choice");
+            System.out.println();
+
+            switch (userSelection) {
+                case 1:
+                    this.addTemperaturesFromFile();
+                    break;
+                case 2:
+                    this.displayOriginalList();
+                    break;
+                case 3:
+                    this.displayLoopReversedList();
+                    break;
+                case 4:
+                    this.displayRecursionReversedList();
+                    break;
+                case 5:
+                    System.out.println("Thank you for using the Temperature Manager Application");
+                    System.out.println("Goodbye");
+                    break;
+                default:
+                    System.out.println("Not a valid selection. Please try again.");
+                    break;
+            }
+            System.out.println();
+        } while (userSelection != 5);
+
+        this.keyboard.close();
     }
 
     /**
@@ -67,6 +100,7 @@ public class TemperatureTUI {
                 userInt = Integer.parseInt(inputtedLine);
                 isValid = true;
             } catch (NumberFormatException numberFormatException) {
+                System.out.println();
                 System.out.println("That wasn't a valid integer. Please try again.");
             }
         } while (!isValid);
@@ -87,6 +121,7 @@ public class TemperatureTUI {
      * to the console.
      */
     private void displayOriginalList() {
+        System.out.println("The original temperatures are:");
     }
 
     /**
@@ -94,6 +129,7 @@ public class TemperatureTUI {
      * result to the console.
      */
     private void displayLoopReversedList() {
+        System.out.println("The loop-reversed temperatures are:");
     }
 
     /**
@@ -101,5 +137,6 @@ public class TemperatureTUI {
      * result to the console.
      */
     private void displayRecursionReversedList() {
+        System.out.println("The recursive-reversed temperatures are:");
     }
 }

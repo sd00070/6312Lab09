@@ -135,11 +135,11 @@ public class TemperatureTUI {
                 String currentLine = selectedFileScanner.nextLine();
 
                 try {
-                    int currentNumber = Integer.parseInt(currentLine);
+                    int currentNumber = Integer.parseInt(currentLine.trim());
                     System.out.println("Read temperature: " + currentNumber);
                     this.primaryManager.addTemperature(currentNumber);
                 } catch (NumberFormatException numberFormatException) {
-                    System.out.println("Error: " + currentLine + " cannot be converted to a number");
+                    System.out.println("Error: \"" + currentLine + "\" cannot be converted to a number");
                 }
             }
         } catch (FileNotFoundException fileNotFoundException) {

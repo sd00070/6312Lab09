@@ -151,6 +151,7 @@ public class TemperatureTUI {
      */
     private void displayOriginalList() {
         System.out.println("The original temperatures are:");
+        System.out.println(this.primaryManager.toString());
     }
 
     /**
@@ -159,6 +160,7 @@ public class TemperatureTUI {
      */
     private void displayLoopReversedList() {
         System.out.println("The loop-reversed temperatures are:");
+        System.out.println(this.primaryManager.reverseLoop());
     }
 
     /**
@@ -167,5 +169,6 @@ public class TemperatureTUI {
      */
     private void displayRecursionReversedList() {
         System.out.println("The recursive-reversed temperatures are:");
+        System.out.println(this.primaryManager.reverseRecursion());
     }
 }

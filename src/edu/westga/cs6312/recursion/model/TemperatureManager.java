@@ -35,4 +35,13 @@ public class TemperatureManager {
 
 		return output.trim();
 	}
+
+	/**
+	 * Appends a new temperature to the list.
+	 * 
+	 * @param newTemperature -- the new temperature to add
+	 */
+	public void addTemperature(int newTemperature) {
+		this.listOfTemperatures.add(newTemperature);
+	}
 }

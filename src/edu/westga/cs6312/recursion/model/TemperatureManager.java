@@ -44,4 +44,22 @@ public class TemperatureManager {
 	public void addTemperature(int newTemperature) {
 		this.listOfTemperatures.add(newTemperature);
 	}
+
+	/**
+	 * Creates a space-delimited, single-line String out of the list of temperatures
+	 * in reverse order of insertion.
+	 * 
+	 * The internal implementation uses a loop.
+	 * 
+	 * @return the reversed list String
+	 */
+	public String reverseLoop() {
+		String output = "";
+
+		for (int currentIndex = this.listOfTemperatures.size() - 1; currentIndex >= 0; currentIndex--) {
+			output += this.listOfTemperatures.get(currentIndex) + " ";
+		}
+
+		return output.trim();
+	}
 }

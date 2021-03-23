@@ -123,28 +123,45 @@ public class TemperatureTUI {
     }
 
     /**
-     * Opens a text file (located at the path provided by the user), reads
-     * temperature values from each of its lines, and inserts the temperature values
-     * into the primary TemperatureManager.
+     * Walks through an open File Scanner, line-by-line, converting each line into a
+     * number, and inserting that number into the TemperatureManager. Walks through
+     * the entire file, ending when it reaches EOF.
+     * 
+     * @param openTemperatureFileScanner -- the open Scanner attached to the
+     *                                   temperature data file
+     * @throws IllegalStateException if the Scanner is closed
+     */
+    private void exhaustScannerOfInputsAddingTemperaturesToTemperatureManager(Scanner openTemperatureFileScanner) {
+        while (openTemperatureFileScanner.hasNextLine()) {
+            String currentLine = openTemperatureFileScanner.nextLine();
+
+            try {
+                int currentNumber = Integer.parseInt(currentLine.trim());
+                System.out.println("Read temperature: " + currentNumber);
+                this.primaryManager.addTemperature(currentNumber);
+            } catch (NumberFormatException numberFormatException) {
+                System.out.println("Error: \"" + currentLine + "\" cannot be converted to a number");
+            }
+        }
+    }
+
+    /**
+     * Opens a text file (located at the path provided by the user), sends the open
+     * Scanner to a helper method to exhaust the file of all lines (storing the
+     * values in the TemperatureManager), and closes the opened file.
      */
     private void addTemperaturesFromFile() {
         String userProvidedPath = this.getUserLine("Please enter file containing the temperatures");
 
         File userSelectedFile = new File(userProvidedPath);
-        try (Scanner selectedFileScanner = new Scanner(userSelectedFile)) {
-            while (selectedFileScanner.hasNextLine()) {
-                String currentLine = selectedFileScanner.nextLine();
-
-                try {
-                    int currentNumber = Integer.parseInt(currentLine.trim());
-                    System.out.println("Read temperature: " + currentNumber);
-                    this.primaryManager.addTemperature(currentNumber);
-                } catch (NumberFormatException numberFormatException) {
-                    System.out.println("Error: \"" + currentLine + "\" cannot be converted to a number");
-                }
-            }
+        try {
+            Scanner selectedFileScanner = new Scanner(userSelectedFile);
+            this.exhaustScannerOfInputsAddingTemperaturesToTemperatureManager(selectedFileScanner);
+            selectedFileScanner.close();
         } catch (FileNotFoundException fileNotFoundException) {
             System.out.println("That file does not exist. Returning to main menu.");
+        } catch (Exception exceptionCatchall) {
+            System.out.println("Something went wrong trying to read the file. Returning to main menu.");
         }
     }
 }

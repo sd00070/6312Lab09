@@ -2,6 +2,7 @@ package edu.westga.cs6312.recursion.view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import edu.westga.cs6312.recursion.model.TemperatureManager;
@@ -89,11 +90,21 @@ public class TemperatureTUI {
     /**
      * Prompts the user for an input with the given message and returns the user's
      * input.
-     * @return the user's input
+     * 
+     * @return the user's input or "5" (the menu option for quit) in case the
+     *         keyboard Scanner gets closed by the user
      */
     private String getUserLine(String message) {
-        System.out.print(message + ": ");
-        return this.keyboard.nextLine();
+        try {
+            System.out.print(message + ": ");
+            return this.keyboard.nextLine();
+        } catch (NoSuchElementException lineNotFoundException) {
+            System.out.println();
+            System.out.println("The user has issued an EOF.");
+            System.out.println("Java does not have any utilities for recovery.");
+            System.out.println("Ending the program.");
+            return "5";
+        }
     }
 
     /**

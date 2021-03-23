@@ -89,6 +89,7 @@ public class TemperatureTUI {
     /**
      * Prompts the user for an input with the given message and returns the user's
      * input.
+     * @return the user's input
      */
     private String getUserLine(String message) {
         System.out.print(message + ": ");

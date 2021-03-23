@@ -10,6 +10,14 @@ import edu.westga.cs6312.recursion.model.TemperatureManager;
 /**
  * Provides a view to display application data to the console. Interacts with
  * the user, requesting textual input, and loads data from text files.
+ * 
+ * Author's notes: This file in particular has been a challenge to know when
+ * best to create a new method. A few of the methods I decided to extract out
+ * (though they were quite small on their own) as they seemed to perform their
+ * own task. I'm really glad I did this with `getUserLine` (there was a gatcha I
+ * would have missed otherwise). The display methods still seem a bit much to
+ * me, but if I were to ever go back and try to improve them later, I may be
+ * glad I extracted them.
  *
  * @author Spencer Dent
  * @version 2021-03-18
@@ -51,16 +59,13 @@ public class TemperatureTUI {
                     this.addTemperaturesFromFile();
                     break;
                 case 2:
-                    System.out.println("The original temperatures are:");
-                    System.out.println(this.primaryManager.toString());
+                    this.displayOriginalList();
                     break;
                 case 3:
-                    System.out.println("The loop-reversed temperatures are:");
-                    System.out.println(this.primaryManager.reverseLoop());
+                    this.displayLoopReversedList();
                     break;
                 case 4:
-                    System.out.println("The recursive-reversed temperatures are:");
-                    System.out.println(this.primaryManager.reverseRecursion());
+                    this.displayRecursionReversedList();
                     break;
                 case 5:
                     System.out.println("Thank you for using the Temperature Manager Application");
@@ -174,5 +179,32 @@ public class TemperatureTUI {
         } catch (Exception exceptionCatchall) {
             System.out.println("Something went wrong trying to read the file. Returning to main menu.");
         }
+    }
+
+    /**
+     * Calls the primary TemperatureManager's toString method and prints the result
+     * to the console.
+     */
+    private void displayOriginalList() {
+        System.out.println("The original temperatures are:");
+        System.out.println(this.primaryManager.toString());
+    }
+
+    /**
+     * Calls the primary TemperatureManager's reverseLoop method and prints the
+     * result to the console.
+     */
+    private void displayLoopReversedList() {
+        System.out.println("The loop-reversed temperatures are:");
+        System.out.println(this.primaryManager.reverseLoop());
+    }
+
+    /**
+     * Calls the primary TemperatureManager's reverseRecursion method and prints the
+     * result to the console.
+     */
+    private void displayRecursionReversedList() {
+        System.out.println("The recursive-reversed temperatures are:");
+        System.out.println(this.primaryManager.reverseRecursion());
     }
 }

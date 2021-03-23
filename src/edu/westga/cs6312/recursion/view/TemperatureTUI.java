@@ -140,7 +140,7 @@ public class TemperatureTUI {
                 System.out.println("Read temperature: " + currentNumber);
                 this.primaryManager.addTemperature(currentNumber);
             } catch (NumberFormatException numberFormatException) {
-                System.out.println("Error: \"" + currentLine + "\" cannot be converted to a number");
+                System.out.println("Error: \"" + currentLine + "\" cannot be converted to an integer");
             }
         }
     }
